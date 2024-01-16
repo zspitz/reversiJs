@@ -1,0 +1,25 @@
+table {
+    border-collapse: collapse;
+}
+
+td {
+    height: 50px;
+    width: 50px;
+    background-color: green;
+    border: 3px solid gray;
+    text-align: center;
+    color: rgba(245, 245, 245, 0.694);
+}
+
+td.b {
+    background-color: black;
+}
+
+td.w {
+    background-color: white;
+    color: black;
+}
+
+#availableMoves p {
+    margin: 0;
+}
