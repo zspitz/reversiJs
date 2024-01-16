@@ -40,7 +40,7 @@ boardElement.addEventListener('click', e => {
     if (gameOver) { return; }
 
     const { row, col } = e.target.dataset;
-    const { msg, player } = playMove(row, col);
+    const { msg, skippedPlayer } = playMove(row, col);
 
     if (msg === messages.invalidMove) {
         alert(msg);
@@ -50,7 +50,7 @@ boardElement.addEventListener('click', e => {
     draw();
 
     if (msg === messages.noMoves1Player) {
-        alert(`${msg} ${player}`);
+        alert(`${msg} ${skippedPlayer}`);
     } else if (msg === messages.noMoves2Player) {
         alert(`${msg}! Game over!`);
     }

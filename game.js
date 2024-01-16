@@ -102,13 +102,14 @@ const playMove = (row, col) => {
         return {};
     }
 
+    const skippedPlayer = currentPlayer;
     currentPlayer = otherPlayer[currentPlayer];
     updateAvailableMoves();
     if (!isEmptyObject(availableMoves)) {
         gameOver = true;
         return {
             msg: messages.noMoves1Player,
-            player: otherPlayer[currentPlayer]
+            skippedPlayer
         };
     }
 
