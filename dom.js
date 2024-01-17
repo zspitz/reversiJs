@@ -32,7 +32,6 @@ const draw = () => {
             .join('\n');
 };
 
-init();
 draw();
 
 boardElement.addEventListener('click', e => {

@@ -117,3 +117,5 @@ const playMove = (row, col) => {
         msg: messages.noMoves2Player
     };
 }
+
+init();
