@@ -13,6 +13,7 @@ const init = () => {
     state[3][4] = 'w';
     state[4][3] = 'w';
     state[4][4] = 'b';
+    updateAvailableMoves();
 };
 
 // move in an existing space - returns false
@@ -24,12 +25,13 @@ const getChanges = (row, col) => {
     const offsets = [-1, 0, 1];
     const directions = offsets
         .flatMap(y => offsets.map(x => [y, x]))
-        .filter(([y, x]) => y != 0 && x != 0);
+        .filter(([y, x]) => y != 0 || x != 0);
 
     const changes = [];
 
     for (const [rowOffset, colOffset] of directions) {
         const line = [];
+        let offsetCount = 1;
         while (true) {
             let testRow = row + rowOffset * offsetCount;
             let testCol = col + colOffset * offsetCount;
@@ -92,6 +94,7 @@ const playMove = (row, col) => {
         };
     }
 
+    state[row][col] = currentPlayer;
     for (const change of changes) {
         state[change.row][change.col] = currentPlayer;
     }
@@ -106,13 +109,13 @@ const playMove = (row, col) => {
     currentPlayer = otherPlayer[currentPlayer];
     updateAvailableMoves();
     if (!isEmptyObject(availableMoves)) {
-        gameOver = true;
         return {
             msg: messages.noMoves1Player,
             skippedPlayer
         };
     }
 
+    gameOver = true;
     return {
         msg: messages.noMoves2Player
     };

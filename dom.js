@@ -1,6 +1,6 @@
-const boardElement = document.querySelector('board');
-const playerElement = document.querySelector('currentPlayer');
-const availableMovesElement = document.querySelector('availableMoves');
+const boardElement = document.querySelector('#board');
+const playerElement = document.querySelector('#currentPlayer');
+const availableMovesElement = document.querySelector('#availableMoves');
 
 const cellHtml = (value, rowIndex, colIndex) =>
     `<td data-row="${rowIndex}" data-col="${colIndex}" ${value ? `class="${value}"` : ''}>${rowIndex},${colIndex}</td>`;
@@ -14,7 +14,7 @@ const rowHtml = (row, rowIndex) =>
     </tr>`;
 
 const draw = () => {
-    boardElement.innerHTLM =
+    boardElement.innerHTML =
         `<table><tbody>
         ${state
             .map((row, rowIndex) => rowHtml(row, rowIndex))
