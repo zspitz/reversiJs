@@ -1,9 +1,21 @@
 const boardElement = document.querySelector('#board');
 const playerElement = document.querySelector('#currentPlayer');
 const availableMovesElement = document.querySelector('#availableMoves');
+const showAvailablesInput = document.querySelector('#showAvailables');
 
-const cellHtml = (value, rowIndex, colIndex) =>
-    `<td data-row="${rowIndex}" data-col="${colIndex}" ${value ? `class="${value}"` : ''}>${rowIndex},${colIndex}</td>`;
+const cellHtml = (value, rowIndex, colIndex) => {
+    const classNames = [];
+    if (value) { classNames.push(value); }
+    if (
+        showAvailablesInput.checked &&
+        availableMoves[`${rowIndex}_${colIndex}`]
+    ) {
+        classNames.push('available');
+    }
+    const classString = classNames.length ? `class="${classNames.join(' ')}"` : '';
+    return `<td data-row="${rowIndex}" data-col="${colIndex}" ${classString}>${rowIndex},${colIndex}</td>`;
+}
+
 
 const rowHtml = (row, rowIndex) =>
     `<tr>
@@ -33,6 +45,8 @@ const draw = () => {
 };
 
 draw();
+
+showAvailablesInput.addEventListener('change', () => draw());
 
 boardElement.addEventListener('click', e => {
     if (!e.target.matches('td')) { return; }
