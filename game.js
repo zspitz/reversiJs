@@ -6,7 +6,7 @@ let gameOver = false;
 const init = () => {
     gameOver = false;
     state.forEach((_, index) => {
-        state[index] = new Array(8).fill();
+        state[index] = Array(8).fill();
     });
 
     state[3][3] = 'b';
@@ -22,14 +22,22 @@ const init = () => {
 const getChanges = (row, col) => {
     if (state[row][col] !== undefined) { return false; }
 
-    const offsets = [-1, 0, 1];
-    const directions = offsets
-        .flatMap(y => offsets.map(x => [y, x]))
-        .filter(([y, x]) => y != 0 || x != 0);
+    const directions = [
+        [-1, -1],
+        [0, -1],
+        [1, -1],
+
+        [-1, 0],
+        [1, 0],
+
+        [-1, 1],
+        [0, 1],
+        [1, 1]
+    ];
 
     const changes = [];
 
-    for (const [rowOffset, colOffset] of directions) {
+    for (const [colOffset, rowOffset] of directions) {
         const line = [];
         let offsetCount = 1;
         while (true) {
@@ -62,7 +70,7 @@ const getChanges = (row, col) => {
 const updateAvailableMoves = () => {
     const _availableMoves = {};
 
-    const counts = range(8);
+    const counts = [...Array(7).keys()];
 
     for (const row of counts) {
         for (const col of counts) {
