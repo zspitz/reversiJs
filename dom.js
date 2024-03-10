@@ -16,7 +16,6 @@ const cellHtml = (value, rowIndex, colIndex) => {
     return `<td data-row="${rowIndex}" data-col="${colIndex}" ${classString}>${rowIndex},${colIndex}</td>`;
 }
 
-
 const rowHtml = (row, rowIndex) =>
     `<tr>
     ${row
